@@ -1,0 +1,5 @@
+langchain
+ollama
+flask
+langchain_ollama
+flask_cors
