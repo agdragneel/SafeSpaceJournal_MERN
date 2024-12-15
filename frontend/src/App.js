@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import Register from './components/Register';
-import Login from './components/Login';
-import Journal from './components/Journal';
+import AuthenticationPage from './pages/AuthenticationPage';
+import JournalPage from './pages/JournalPage';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -22,15 +20,9 @@ function App() {
   return (
     <div className="App">
       {!user ? (
-        <>
-          <Register onLogin={handleLogin} />
-          <Login onLogin={handleLogin} />
-        </>
+        <AuthenticationPage onLogin={handleLogin} />
       ) : (
-        <>
-          <button onClick={handleLogout}>Logout</button>
-          <Journal token={user} />
-        </>
+        <JournalPage onLogout={handleLogout} token={user} />
       )}
     </div>
   );

@@ -8,22 +8,24 @@ const Journal = ({ token }) => {
   const [heading, setHeading] = useState("");
 
   // Fetch journal entries
+  const fetchEntries = async () => {
+    try {
+      const { data } = await axios.get(
+        "http://localhost:5001/api/journal/entries",
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      setJournalEntries(data.entries);
+    } catch (error) {
+      console.error("Error fetching journal entries:", error.message);
+    }
+  };
+
+  // Fetch entries on component mount or when token changes
   useEffect(() => {
-    const fetchEntries = async () => {
-      try {
-        const { data } = await axios.get(
-          "http://localhost:5001/api/journal/entries",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-          }
-        );
-        setJournalEntries(data.entries);
-      } catch (error) {
-        console.error("Error fetching journal entries:", error.message);
-      }
-    };
     fetchEntries();
-  }, [token]);
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,11 +36,7 @@ const Journal = ({ token }) => {
 
       const userId = decoded.userId; // Extract userId
       const createdBy = decoded.email; // Extract email (ensure token contains email)
-      console.log("Userid");
-      console.log(userId);
 
-      console.log("mail");
-      console.log(createdBy);
       if (!userId || !createdBy) {
         alert("Error: User information is missing in the token.");
         return;
@@ -53,14 +51,15 @@ const Journal = ({ token }) => {
         createdBy, // Store the user's email
       };
 
-      console.log("New Journal Entry:", newJournalEntry);
-
       // Send the journal entry to the backend
       await axios.post(
         "http://localhost:5001/api/journal/entries",
         newJournalEntry,
         { headers: { Authorization: `Bearer ${token}` } }
       );
+
+      // Fetch the updated list of journal entries
+      await fetchEntries();
 
       // Reset the input fields
       setNewEntry("");
