@@ -1,18 +1,21 @@
 // src/components/Navbar.js
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './Navbar.css'
 
 const Navbar = ({ user, onLogout }) => {
   return (
-    <nav>
-      <ul>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/about">About</Link></li>
-        <li><Link to="/contact">Contact</Link></li>
+    <nav className="navbar">
+      <ul className="navbar-list">
+        <li className="navbar-item"><Link className="navbar-link" to="/">Home</Link></li>
+        <li className="navbar-item"><Link className="navbar-link" to="/about">About</Link></li>
+        <li className="navbar-item"><Link className="navbar-link" to="/contact">Contact</Link></li>
         {user ? (
-          <li><button onClick={onLogout}>Logout</button></li>
+          <li className="navbar-item">
+            <Link className="navbar-link " to="/" onClick={onLogout}>Logout</Link>
+          </li>
         ) : (
-          <li><Link to="/login">Login/Register</Link></li>
+          <li className="navbar-item"><Link className="navbar-link" to="/login">Login/Register</Link></li>
         )}
       </ul>
     </nav>
