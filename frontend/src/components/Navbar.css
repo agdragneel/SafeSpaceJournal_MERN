@@ -18,7 +18,7 @@
   }
   
   .navbar-logo-link {
-    color: #0050B6; /* Bright Blue */
+    color: #fcfcfc; /* Bright Blue */
     text-decoration: none;
     font-size: 24px;
     font-weight: bold;
@@ -38,7 +38,7 @@
   }
   
   .navbar-link {
-    color: #0050B6; /* Bright Blue */
+    color: #e2e8f0; /* Bright Blue */
     text-decoration: none;
     font-size: 18px;
     font-weight: 500;
@@ -46,7 +46,7 @@
   }
   
   .navbar-link:hover {
-    color: #72AE6F; /* Muted Green */
+    color: #a7e0a4; /* Muted Green */
   }
   
   .navbar-button {
