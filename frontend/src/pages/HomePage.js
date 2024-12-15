@@ -1,7 +1,8 @@
 // src/Pages/HomePage.js
 import React from 'react';
-import ParticlesComponent from '../components/Particles';  // Import the Particles component
-import './HomePage.css';  // Import custom CSS for the page
+import ParticlesComponent from '../components/Particles'; // Import the Particles component
+import './HomePage.css'; // Import custom CSS for the page
+import { motion } from 'framer-motion';
 
 const HomePage = () => {
   return (
@@ -11,11 +12,49 @@ const HomePage = () => {
 
       {/* Content that will be displayed over the particles */}
       <div className="content">
-        <h1>Welcome to your Safe Space</h1>
-        <br/>
-        <p>Welcome to your sanctuary, a space where your thoughts can flow freely, untouched by judgment or whispers.</p>
-        <p>Here, your words are yours alone, a place for quiet reflection and honest venting, with the gentle guidance of AI to support your journey.</p>
-        <p>Stay a while, and feel at home.</p>
+        <div>
+          <h1>Welcome to your SafeSpace</h1>
+          <br />
+        </div>
+
+        <motion.div
+          className="first-motion"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{duration: 1 }}
+        >
+          <p>
+            Welcome to your sanctuary, a space where your thoughts can flow freely, untouched by judgment or whispers.
+          </p>
+        </motion.div>
+
+        <motion.div
+          className="spaced-motion"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{duration: 1 }}
+        >
+          <p>
+            This is more than just a journal; it's a compassionate listener powered by AI. As you pour out your thoughts, you can ask for gentle analysis to uncover patterns, insights, and pathways to healing. It’s therapy-like feedback, thoughtful and understanding, always there to help you navigate your mind.
+          </p>
+          <p>
+            Whether you need clarity or simply a moment to breathe, let the reflections guide you. Here, every word you write is met with care.
+          </p>
+        </motion.div>
+
+        <motion.div
+          className="spaced-motion"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{duration: 1 }}
+        >
+          <p>
+            Feeling overwhelmed or just want to talk? Our AI-powered chatbot is ready to listen. It’s a conversation without pressure, a companion that responds with empathy and understanding whenever you need it most.
+          </p>
+          <p>
+            This is your space to write, to heal, and to connect with the support you deserve. Your thoughts are safe here.
+          </p>
+        </motion.div>
       </div>
     </div>
   );

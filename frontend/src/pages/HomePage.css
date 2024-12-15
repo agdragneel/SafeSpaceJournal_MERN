@@ -1,35 +1,63 @@
-/* src/Pages/HomePage.css */
+/* Ensure body doesn't scroll */
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Prevent double scroll on the body */
+  height: 100%;
+}
 
 /* Ensure the particle container takes up the entire screen */
 .home-page {
-    position: relative;
-    height: 100vh;  /* Full screen height */
-    overflow: hidden;  /* Hide any particles that go beyond the screen */
-  }
-  
-  /* Ensure particles stay in the background */
-  #particles-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;  /* Particles stay behind the content */
-  }
-  
-  /* Style for the content displayed over the particles */
-  .content {
-    position: relative;
-    z-index: 1;  /* Content stays above the particles */
-    text-align: center;
-    padding: 20px;
-  }
-  
-  h1 {
-    color: #ffffff;  /* Blue color for heading */
-  }
-  
-  p {
-    color: #ffffff;  /* Dark text for readability */
-  }
-  
+  position: relative;
+  height: 100vh; /* Fixed full screen height */
+  overflow-y: scroll; /* Allow scrolling within the page */
+}
+
+/* Hide scrollbar for WebKit-based browsers (Chrome, Safari) */
+.home-page::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for Firefox */
+.home-page {
+  scrollbar-width: none;
+}
+
+/* Ensure particles stay in the background */
+#particles-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Particles stay behind the content */
+}
+
+/* Style for the content displayed over the particles */
+.content {
+  position: relative;
+  z-index: 1; /* Content stays above the particles */
+  text-align: center;
+  padding: 100px 20px; /* Add padding for vertical spacing */
+  box-sizing: border-box; /* Ensure padding is included in height calculation */
+}
+
+/* Add spacing between each motion.div (except the first one) */
+.spaced-motion {
+  margin-top: 25rem; /* Add large spacing above these motion.div elements */
+}
+
+/* Styling for the heading */
+h1 {
+  color: #ffffff;
+  font-size: 3rem; /* Increase font size */
+  margin-bottom: 50px; /* Add spacing below the heading */
+}
+
+/* Styling for the paragraphs */
+p {
+  color: #ffffff;
+  font-size: 1.5rem; /* Increase font size */
+  line-height: 1.8;  /* Increase line spacing for better readability */
+  margin-bottom: 50px; /* Add spacing between paragraphs */
+}
