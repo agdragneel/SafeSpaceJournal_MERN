@@ -18,7 +18,12 @@ const Login = ({ onLogin }) => {
     try {
       const { data } = await axios.post('http://localhost:5001/api/auth/login', formData);
       alert(data.message);
-      onLogin(data.token); // Call the onLogin prop to set user
+      
+      // Store the token in localStorage
+      localStorage.setItem('token', data.token);
+
+      // Call the onLogin prop to set user
+      onLogin(data.token); 
     } catch (error) {
       alert('Error logging in');
     }

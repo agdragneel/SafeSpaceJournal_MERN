@@ -1,6 +1,6 @@
 const express = require('express');
 const Journal = require('../models/Journal');  // Import the Journal model
-const authMiddleware = require('../middleware/authMiddleware');  // Import authentication middleware
+const { authMiddleware } = require('../middleware/authMiddleware');  // Import authentication middleware
 const router = express.Router();
 
 // Add Journal Entry
