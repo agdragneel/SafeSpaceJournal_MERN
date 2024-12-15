@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import AuthenticationPage from './pages/AuthenticationPage'; // Correct path to AuthenticationPage
 import JournalPage from './pages/JournalPage'; // Correct path to JournalPage
 import HomePage from './pages/HomePage'; // Correct path to HomePage
+import Navbar from './components/Navbar'; // Import Navbar
 
 function App() {
   const [user, setUser] = useState(null);
@@ -31,6 +32,8 @@ function App() {
   return (
     <Router>
       <div className="App">
+        {/* Include Navbar on every page */}
+        <Navbar user={user} onLogout={handleLogout} />
         <Routes>
           {/* HomePage does not require authentication */}
           <Route path="/" element={<HomePage />} />
@@ -43,7 +46,7 @@ function App() {
             path="/journal"
             element={
               user ? (
-                <JournalPage onLogout={handleLogout} token={user} /> // User is logged in
+                <JournalPage  token={user} /> // User is logged in
               ) : (
                 <AuthenticationPage onLogin={handleLogin} /> // User is not logged in
               )

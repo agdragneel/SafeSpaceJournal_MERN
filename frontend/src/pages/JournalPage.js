@@ -1,10 +1,10 @@
 import React from 'react';
 import Journal from '../components/Journal';
 
-const JournalPage = ({ token, onLogout }) => {
+const JournalPage = ({ token }) => {
   return (
     <div>
-      <button onClick={onLogout}>Logout</button>
+      
       <Journal token={token} />
     </div>
   );
