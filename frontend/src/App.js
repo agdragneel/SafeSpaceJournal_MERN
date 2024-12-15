@@ -1,6 +1,9 @@
+// src/App.js
 import React, { useState } from 'react';
-import AuthenticationPage from './pages/AuthenticationPage';
-import JournalPage from './pages/JournalPage';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Import Routes instead of Switch
+import AuthenticationPage from './pages/AuthenticationPage'; // Correct path to AuthenticationPage
+import JournalPage from './pages/JournalPage'; // Correct path to JournalPage
+import HomePage from './pages/HomePage'; // Correct path to HomePage
 
 function App() {
   const [user, setUser] = useState(null);
@@ -18,13 +21,24 @@ function App() {
   };
 
   return (
-    <div className="App">
-      {!user ? (
-        <AuthenticationPage onLogin={handleLogin} />
-      ) : (
-        <JournalPage onLogout={handleLogout} token={user} />
-      )}
-    </div>
+    <Router>
+      <div className="App">
+        <Routes> {/* Replaced Switch with Routes */}
+          <Route path="/" element={<HomePage />} /> {/* Replaced component with element */}
+          <Route path="/login" element={<AuthenticationPage onLogin={handleLogin} />} />
+          <Route
+            path="/journal"
+            element={
+              !user ? (
+                <AuthenticationPage onLogin={handleLogin} />
+              ) : (
+                <JournalPage onLogout={handleLogout} token={user} />
+              )
+            }
+          />
+        </Routes>
+      </div>
+    </Router>
   );
 }
 
