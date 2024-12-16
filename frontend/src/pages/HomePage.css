@@ -42,9 +42,13 @@ body, html {
   box-sizing: border-box; /* Ensure padding is included in height calculation */
 }
 
-/* Add spacing between each motion.div (except the first one) */
+/* Add equal top and bottom margin to motion.div elements (12.5rem each) */
 .spaced-motion {
-  margin-top: 25rem; /* Add large spacing above these motion.div elements */
+  margin: 25rem 0; /* 12.5rem margin on top and bottom */
+}
+
+.spaced-motion2 {
+  margin: 12.5rem 0; /* 12.5rem margin on top and bottom */
 }
 
 /* Styling for the heading */
@@ -60,4 +64,25 @@ p {
   font-size: 1.5rem; /* Increase font size */
   line-height: 1.8;  /* Increase line spacing for better readability */
   margin-bottom: 50px; /* Add spacing between paragraphs */
+}
+
+/* Styling for the Get Started button */
+.get-started-button {
+  display: inline-block;
+  padding: 12px 24px;
+  font-size: 1.5rem;
+  font-family: 'Helvetica Neue', sans-serif; /* Soothing font */
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  background: transparent;
+  border-radius: 25px;
+  text-decoration: none; /* Remove default link underline */
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Hover effect for the Get Started button */
+.get-started-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
 }
