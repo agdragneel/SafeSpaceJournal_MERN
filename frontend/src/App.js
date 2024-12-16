@@ -5,6 +5,7 @@ import AuthenticationPage from './pages/AuthenticationPage'; // Correct path to 
 import JournalPage from './pages/JournalPage'; // Correct path to JournalPage
 import HomePage from './pages/HomePage'; // Correct path to HomePage
 import Navbar from './components/Navbar'; // Import Navbar
+import ContactPage from './pages/ContactPage'; // Import ContactPage
 
 function App() {
   const [user, setUser] = useState(null);
@@ -46,12 +47,15 @@ function App() {
             path="/journal"
             element={
               user ? (
-                <JournalPage  token={user} /> // User is logged in
+                <JournalPage token={user} /> // User is logged in
               ) : (
                 <AuthenticationPage onLogin={handleLogin} /> // User is not logged in
               )
             }
           />
+
+          {/* ContactPage */}
+          <Route path="/contact" element={<ContactPage />} /> {/* New route for contact page */}
         </Routes>
       </div>
     </Router>

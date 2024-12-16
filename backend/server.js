@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const authRoutes = require('./routes/authRoutes');
 const journalRoutes = require('./routes/journalRoutes');
+const contactMessageRoutes = require('./routes/contactMessageRoutes'); // Import the ContactMessage routes
 
 dotenv.config();  // To load environment variables from .env file
 
@@ -24,6 +25,7 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 // Use routes
 app.use('/api/auth', authRoutes);
 app.use('/api/journal', journalRoutes);
+app.use('/api/contact', contactMessageRoutes); // Add the contact message route
 
 // Start the server
 const PORT = process.env.PORT || 5001;
