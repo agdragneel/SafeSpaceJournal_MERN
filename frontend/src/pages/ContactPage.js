@@ -2,38 +2,16 @@ import React, { useState } from 'react';
 import ParticlesComponent from '../components/Particles'; // Import the Particles component
 import './ContactPage.css'; // Import custom CSS for the page
 import { motion } from 'framer-motion';
-import axios from 'axios'; // Import axios for making HTTP requests
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Import FontAwesome
+import { faEnvelope, faPhone, faPaperPlane } from '@fortawesome/free-solid-svg-icons'; // Icons for Email, Phone, and Form
 
 const ContactPage = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false); // Track the submission state
-  const [error, setError] = useState(''); // Error state to capture submission errors
+  const [activeSection, setActiveSection] = useState(null); // Track the active section to display (email, form, phone)
+  const [highlightedIcon, setHighlightedIcon] = useState(null); // Track which icon is highlighted
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsSubmitting(true); // Set submitting state to true
-
-    try {
-      // Send POST request to backend
-      const response = await axios.post('http://localhost:5001/api/contact', formData);
-      alert(response.data.message); // Show success message from backend
-      setFormData({ name: '', email: '', message: '' }); // Reset the form
-    } catch (err) {
-      // Handle any errors
-      setError('There was an error submitting your message. Please try again.');
-      console.error(err);
-    } finally {
-      setIsSubmitting(false); // Reset submitting state
-    }
+  const handleIconClick = (section) => {
+    setActiveSection(section);
+    setHighlightedIcon(section); // Set the clicked icon as highlighted
   };
 
   return (
@@ -42,57 +20,90 @@ const ContactPage = () => {
       <ParticlesComponent id="particles-background" />
 
       {/* Content that will be displayed over the particles */}
-      <div className="contact-form-container">
-        <motion.h2
-          className="contact-title"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: false, amount: 0.1 }}
-        >
-          Contact Us
-        </motion.h2>
+      <div className="contact-container">
+        {/* Left Icons */}
+        <div className="icons-container">
+          <motion.div
+            className={`contact-icon ${highlightedIcon === 'email' ? 'highlighted' : ''}`}
+            onClick={() => handleIconClick('email')}
+            whileHover={{ scale: 1.2 }}
+            transition={{ duration: 0.3 }}
+          >
+            <FontAwesomeIcon icon={faEnvelope} size="2x" />
+          </motion.div>
+          <motion.div
+            className={`contact-icon ${highlightedIcon === 'form' ? 'highlighted' : ''}`}
+            onClick={() => handleIconClick('form')}
+            whileHover={{ scale: 1.2 }}
+            transition={{ duration: 0.3 }}
+          >
+            <FontAwesomeIcon icon={faPaperPlane} size="2x" />
+          </motion.div>
+          <motion.div
+            className={`contact-icon ${highlightedIcon === 'phone' ? 'highlighted' : ''}`}
+            onClick={() => handleIconClick('phone')}
+            whileHover={{ scale: 1.2 }}
+            transition={{ duration: 0.3 }}
+          >
+            <FontAwesomeIcon icon={faPhone} size="2x" />
+          </motion.div>
+        </div>
 
-        {/* Display error message if there is one */}
-        {error && <p className="error-message">{error}</p>}
+        {/* Content Right Side */}
+        <div className="contact-content">
+          {/* Display the initial message */}
+          {activeSection === null && (
+            <motion.div
+              className="contact-info"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
+              <h2>How would you like to contact us?</h2>
+            </motion.div>
+          )}
 
-        <motion.form
-          onSubmit={handleSubmit}
-          className="contact-form"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1 }}
-          viewport={{ once: false, amount: 0.1 }}
-        >
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            placeholder="Your Name"
-            required
-          />
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="Your Email"
-            required
-          />
-          <textarea
-            name="message"
-            value={formData.message}
-            onChange={handleChange}
-            placeholder="Your Message"
-            required
-          />
-          <button type="submit" disabled={isSubmitting}>
-            {isSubmitting ? 'Submitting...' : 'Send Message'}
-          </button>
-        </motion.form>
+          {activeSection === 'email' && (
+            <motion.div
+              className="contact-info"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
+              <h2>Email Us</h2>
+              <p>contact@example.com</p>
+            </motion.div>
+          )}
+
+          {activeSection === 'form' && (
+            <motion.div
+              className="contact-form-container"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
+              <h2>Contact Form</h2>
+              <form>
+                <input type="text" name="name" placeholder="Your Name" required />
+                <input type="email" name="email" placeholder="Your Email" required />
+                <textarea name="message" placeholder="Your Message" required />
+                <button type="submit">Send Message</button>
+              </form>
+            </motion.div>
+          )}
+
+          {activeSection === 'phone' && (
+            <motion.div
+              className="contact-info"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 1 }}
+            >
+              <h2>Call Us!</h2>
+              <p>(+1) 234-567-890</p>
+            </motion.div>
+          )}
+        </div>
       </div>
     </div>
   );
