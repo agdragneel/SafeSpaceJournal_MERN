@@ -13,6 +13,7 @@ const Navbar = ({ user, onLogout }) => {
         {user ? (
           <>
             <li className="navbar-item"><Link className="navbar-link" to="/journal">Journal</Link></li>
+            <li className="navbar-item"><Link className="navbar-link" to="/chatbot">Talk</Link></li>
             <li className="navbar-item">
               <Link className="navbar-link" to="/" onClick={onLogout}>Logout</Link>
             </li>

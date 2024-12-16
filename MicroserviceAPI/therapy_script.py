@@ -35,6 +35,7 @@ def index():
 @app.route('/analyze_mood', methods=['POST'])
 def analyze_mood_route():
     print("Started Analysis")
+    
     data = request.json  # Access the JSON data
     entry_text = data.get('entry_text', '')  # Get the journal entry text
     
@@ -43,6 +44,7 @@ def analyze_mood_route():
 
     # Analyze mood using the model
     analysis_result = analyze_mood(entry_text)
+    print("Finished Analysis.")
     
     return jsonify({'mood_analysis': analysis_result})
 

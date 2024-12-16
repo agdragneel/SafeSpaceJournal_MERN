@@ -6,6 +6,7 @@ import JournalPage from './pages/JournalPage'; // Correct path to JournalPage
 import HomePage from './pages/HomePage'; // Correct path to HomePage
 import Navbar from './components/Navbar'; // Import Navbar
 import ContactPage from './pages/ContactPage'; // Import ContactPage
+import ChatbotPage from './pages/ChatbotPage';
 
 function App() {
   const [user, setUser] = useState(null);
@@ -56,6 +57,7 @@ function App() {
 
           {/* ContactPage */}
           <Route path="/contact" element={<ContactPage />} /> {/* New route for contact page */}
+          <Route path="/chatbot" element={<ChatbotPage />} />
         </Routes>
       </div>
     </Router>

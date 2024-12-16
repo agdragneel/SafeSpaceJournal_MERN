@@ -1,0 +1,129 @@
+.chatbot-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 70vh; /* Full viewport height */
+  padding: 20px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.chat-window {
+  flex-grow: 1; /* Take up the available space above the input field */
+  width: 100%;
+  max-width: 600px;
+  height: calc(100vh - 120px); /* Reduce the chat window height (subtract the height of the input area) */
+  overflow-y: auto; /* Enable vertical scrolling */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-left: 7rem; /* Adjust to pull the chat window to the right */
+}
+
+.chat-window::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Webkit-based browsers */
+}
+
+.chat-message {
+  padding: 10px 15px;
+  border: 2px solid white;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.1); /* Transparent background */
+  color: white;
+  max-width: 80%;
+  word-wrap: break-word;
+  align-self: flex-start;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+}
+
+.chat-message.user {
+  align-self: flex-end;
+  border-color: white;
+}
+
+.chat-message.bot {
+  align-self: flex-start;
+  border-color: white;
+}
+
+.chat-input {
+  width: 100%;
+  max-width: 600px; /* Match chat window width */
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.8);
+  box-sizing: border-box;
+  align-items: center; /* Vertically align items */
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border: 2px solid white;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.1); /* Transparent input box */
+  color: white;
+  outline: none;
+  font-size: 16px;
+}
+
+.chat-input button {
+  padding: 10px 20px;
+  border: 2px solid white;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 0.1); /* Transparent button */
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.chat-input button:hover {
+  background-color: white;
+  color: black;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 3px solid transparent;
+  border-top: 3px solid white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.clear-history-btn {
+  padding: 10px 15px;
+  background-color: #f44336; /* Red color */
+  color: white;
+  border: 2px solid white;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.clear-history-btn:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}
+
+.clear-history-btn:disabled {
+  background-color: #e57373;
+  cursor: not-allowed;
+}
