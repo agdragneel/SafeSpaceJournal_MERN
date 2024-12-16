@@ -1,6 +1,7 @@
 // src/components/Register.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import './Register.css'; // Ensure the styles are imported
 
 const Register = ({ onLogin }) => {
   const [formData, setFormData] = useState({
@@ -28,9 +29,9 @@ const Register = ({ onLogin }) => {
   };
 
   return (
-    <div>
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="register-form">
+      <h2 className="register-title">Register</h2>
+      <form onSubmit={handleSubmit} autoComplete="off">
         <input
           type="text"
           name="firstName"
@@ -38,6 +39,7 @@ const Register = ({ onLogin }) => {
           onChange={handleChange}
           placeholder="First Name"
           required
+          autoComplete="off"
         />
         <input
           type="text"
@@ -46,6 +48,7 @@ const Register = ({ onLogin }) => {
           onChange={handleChange}
           placeholder="Last Name"
           required
+          autoComplete="off"
         />
         <input
           type="date"
@@ -54,6 +57,7 @@ const Register = ({ onLogin }) => {
           onChange={handleChange}
           placeholder="Date of Birth"
           required
+          autoComplete="off"
         />
         <input
           type="email"
@@ -62,6 +66,7 @@ const Register = ({ onLogin }) => {
           onChange={handleChange}
           placeholder="Email"
           required
+          autoComplete="off"
         />
         <input
           type="password"
@@ -70,6 +75,7 @@ const Register = ({ onLogin }) => {
           onChange={handleChange}
           placeholder="Password"
           required
+          autoComplete="new-password"
         />
         <button type="submit">Register</button>
       </form>

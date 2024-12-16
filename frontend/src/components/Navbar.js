@@ -11,7 +11,6 @@ const Navbar = ({ user, onLogout }) => {
       </div>
       <ul className="navbar-list">
         <li className="navbar-item"><Link className="navbar-link" to="/">Home</Link></li>
-        <li className="navbar-item"><Link className="navbar-link" to="/about">About</Link></li>
         <li className="navbar-item"><Link className="navbar-link" to="/contact">Contact</Link></li>
         {user ? (
           <li className="navbar-item">

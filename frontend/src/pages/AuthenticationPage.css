@@ -1,0 +1,50 @@
+/* Container for the entire authentication page */
+.auth-page {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* Content container */
+.auth-content {
+  position: relative;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+/* Heading styling */
+.auth-heading {
+  color: #ffffff;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Section containing forms */
+.auth-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Toggle between login and registration */
+.auth-toggle {
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+/* Link styling for toggling */
+.auth-link {
+  color: #00bfff;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.auth-link:hover {
+  color: #1e90ff;
+}

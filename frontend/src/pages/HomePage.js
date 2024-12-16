@@ -14,7 +14,7 @@ const HomePage = () => {
       {/* Content that will be displayed over the particles */}
       <div className="content">
         <div>
-          <h1>Welcome to your SafeSpace</h1>
+          <h1 className="home-heading">Welcome to your SafeSpace</h1>
           <br />
         </div>
 
@@ -26,7 +26,7 @@ const HomePage = () => {
           transition={{ duration: 1 }}
           viewport={{ once: false, amount: 0.1 }}
         >
-          <p>
+          <p className="home-paragraph">
             Welcome to your sanctuary, a space where your thoughts can flow freely, untouched by judgment or whispers.
           </p>
         </motion.div>
@@ -39,11 +39,15 @@ const HomePage = () => {
           transition={{ duration: 1 }}
           viewport={{ once: false, amount: 0.1 }}
         >
-          <img src="https://i.ibb.co/Lrc90xZ/Constellation-Circle2.png" alt="Constellation_circle" />
-          <p>
+          <img
+            className="home-image"
+            src="https://i.ibb.co/Lrc90xZ/Constellation-Circle2.png"
+            alt="Constellation_circle"
+          />
+          <p className="home-paragraph">
             This is more than just a journal; it's a compassionate listener powered by AI. As you pour out your thoughts, you can ask for gentle analysis to uncover patterns, insights, and pathways to healing. It’s therapy-like feedback, thoughtful and understanding, always there to help you navigate your mind.
           </p>
-          <p>
+          <p className="home-paragraph">
             Whether you need clarity or simply a moment to breathe, let the reflections guide you. Here, every word you write is met with care.
           </p>
         </motion.div>
@@ -56,10 +60,10 @@ const HomePage = () => {
           transition={{ duration: 1 }}
           viewport={{ once: false, amount: 0.1 }}
         >
-          <p>
+          <p className="home-paragraph">
             Feeling overwhelmed or just want to talk? Our AI-powered chatbot is ready to listen. It’s a conversation without pressure, a companion that responds with empathy and understanding whenever you need it most.
           </p>
-          <p>
+          <p className="home-paragraph">
             This is your space to write, to heal, and to connect with the support you deserve. Your thoughts are safe here.
           </p>
 

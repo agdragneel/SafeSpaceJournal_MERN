@@ -1,0 +1,56 @@
+/* src/components/Login.css */
+
+.login-form {
+    background: transparent;
+    border-radius: 20px; /* Increased roundness */
+    padding: 40px;
+    max-width: 400px;
+    margin: 0 auto;
+    text-align: center;
+    font-family: 'Helvetica Neue', sans-serif; /* Soothing font */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center items horizontally */
+  }
+  
+  .login-title {
+    color: #ffffff;
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .login-form input {
+    width: 100%;
+    padding: 14px; /* Increased padding for better spacing */
+    margin-bottom: 20px;
+    background: transparent;
+    border: 2px solid #ffffff;
+    border-radius: 20px; /* Increased roundness */
+    color: #ffffff;
+    font-size: 1rem;
+    outline: none;
+  }
+  
+  .login-form input::placeholder {
+    color: rgba(255, 255, 255, 0.7); /* Semi-transparent placeholder text */
+  }
+  
+  .login-form button {
+    width: 50%; /* Reduced width */
+    padding: 12px; /* Reduced padding */
+    background: transparent;
+    border: 2px solid #ffffff;
+    border-radius: 20px; /* Increased roundness */
+    color: #ffffff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    margin-top: 20px; /* Added spacing above the button */
+    align-self: center; /* Center the button horizontally */
+  }
+  
+  .login-form button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+  }
+  

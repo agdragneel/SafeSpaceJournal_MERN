@@ -1,6 +1,7 @@
 // src/components/Login.js
 import React, { useState } from 'react';
 import axios from 'axios';
+import './Login.css'; // Ensure the styles are correctly imported
 
 const Login = ({ onLogin }) => {
   const [formData, setFormData] = useState({
@@ -30,9 +31,9 @@ const Login = ({ onLogin }) => {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
+    <div className="login-form">
+      <h2 className="login-title">Login</h2>
+      <form onSubmit={handleSubmit} autoComplete="off">
         <input
           type="email"
           name="email"
@@ -40,6 +41,7 @@ const Login = ({ onLogin }) => {
           onChange={handleChange}
           placeholder="Email"
           required
+          autoComplete="off" // Disable autofill for the email field
         />
         <input
           type="password"
@@ -48,6 +50,7 @@ const Login = ({ onLogin }) => {
           onChange={handleChange}
           placeholder="Password"
           required
+          autoComplete="new-password" // Disable autofill for the password field
         />
         <button type="submit">Login</button>
       </form>
