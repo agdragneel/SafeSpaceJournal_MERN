@@ -10,6 +10,8 @@ const Journal = ({ token }) => {
   const [selectedEntry, setSelectedEntry] = useState(null); // Track selected entry
   const [isWriting, setIsWriting] = useState(false); // Toggle between writing mode
   const [isAddMode, setIsAddMode] = useState(false); // Check if the "Add" button is in use
+  const [analysis, setAnalysis] = useState(""); // Store analysis response
+  const [isAnalyzing, setIsAnalyzing] = useState(false); // Show loading state for analysis
 
   // Fetch journal entries
   const fetchEntries = async () => {
@@ -20,10 +22,10 @@ const Journal = ({ token }) => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-  
+
       // Sort entries by createdAt in descending order
       const sortedEntries = data.entries.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-  
+
       // Set the sorted entries
       setJournalEntries(sortedEntries);
     } catch (error) {
@@ -89,6 +91,7 @@ const Journal = ({ token }) => {
 
   const handleEntryClick = (entry) => {
     setSelectedEntry(entry);
+    setAnalysis(""); // Clear previous analysis
     setIsWriting(false); // Ensure it's not in writing mode when an entry is clicked
     setIsAddMode(false); // Reset the Add mode button
   };
@@ -103,7 +106,27 @@ const Journal = ({ token }) => {
       setSelectedEntry(null); // Clear the selected entry when adding a new one
     }
   };
-  
+
+  const handleAnalyzeEntry = async () => {
+    if (!selectedEntry) return;
+
+    setIsAnalyzing(true);
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/analyze_mood",
+        { entry_text: selectedEntry.entryText },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      setAnalysis(response.data.mood_analysis);
+    } catch (error) {
+      console.error("Error analyzing entry:", error.message);
+      setAnalysis("Error: Unable to analyze the entry.");
+    } finally {
+      setIsAnalyzing(false);
+    }
+  };
+
   return (
     <div className="journal-page">
       <div className="journal-container">
@@ -162,11 +185,28 @@ const Journal = ({ token }) => {
             </div>
           ) : selectedEntry ? (
             <>
-              <h2>{selectedEntry.heading}</h2>
-              <span style={{ fontStyle: 'italic', fontSize: '0.9em', color: '#666' }}>
-                {formatDate(selectedEntry.createdAt)}
-              </span>
+              <div className="entry-header">
+                <h2>{selectedEntry.heading}</h2>
+                <span style={{ fontStyle: 'italic', fontSize: '0.9em', color: '#666' }}>
+                  {formatDate(selectedEntry.createdAt)}
+                </span>
+                <button className="analyze-button" onClick={handleAnalyzeEntry}>
+                  {isAnalyzing ? (
+                    <>
+                      Analyzing... <div className="spinner"></div>
+                    </>
+                  ) : (
+                    "Analyze Entry"
+                  )}
+                </button>
+              </div>
               <p>{selectedEntry.entryText}</p>
+              {analysis && (
+                <div className="analysis-response">
+                  <strong>Therapist's Words:</strong>
+                  <p>{analysis}</p>
+                </div>
+              )}
             </>
           ) : (
             <div className="no-entry">No Entry Selected</div>

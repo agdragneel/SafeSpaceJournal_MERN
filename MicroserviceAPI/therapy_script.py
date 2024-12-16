@@ -34,6 +34,7 @@ def index():
 
 @app.route('/analyze_mood', methods=['POST'])
 def analyze_mood_route():
+    print("Started Analysis")
     data = request.json  # Access the JSON data
     entry_text = data.get('entry_text', '')  # Get the journal entry text
     
