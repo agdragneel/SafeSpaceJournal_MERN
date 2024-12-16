@@ -1,0 +1,26 @@
+.journal-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Center content vertically */
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center text and journal horizontally */
+}
+
+.journal-text-container {
+  width: 100%; /* Make the container span the full width */
+  display: flex;
+  justify-content: center; /* Center the text horizontally */
+}
+
+.journal-text {
+  font-size: 1.2em;
+  color: #fff; /* Or any color you prefer */
+  font-style: italic; /* Makes the text italic */
+  opacity: 0.3; /* Makes the text semi-transparent (adjust the value as needed) */
+  margin: auto; /* Centers the text in the container */
+}

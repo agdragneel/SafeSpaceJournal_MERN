@@ -1,0 +1,209 @@
+/* Apply full-screen layout with 90% height */
+.journal-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Journal Container: Takes up full width and 90% height */
+.journal-container {
+    display: flex;
+    flex-direction: row;
+    width: 100vw; /* 100% of the viewport width */
+    height: 90vh; /* 90% of the viewport height */
+    background: rgba(255, 255, 255, 0.9); /* Clean white, semi-transparent */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Darker shadow */
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Left Pane: Takes up 30% of the container */
+.left-pane {
+    flex: 0 0 30%; /* 30% width of the container */
+    background: rgba(255, 255, 255, 0.1); /* Very light, semi-transparent white */
+    border-right: 1px solid rgba(255, 255, 255, 0.2); /* Light white border */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+}
+
+/* Add button in the left pane */
+.add-button {
+    background: rgba(13, 27, 42, 0.9); /* Darker button */
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.add-button:hover {
+    background: rgba(13, 27, 42, 1); /* Darker shade on hover */
+}
+
+.add-button:active {
+    background: rgba(13, 27, 42, 1); /* Even darker on active */
+}
+
+/* Entry list in left pane */
+.entry-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.entry-list h3 {
+    margin: 0;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.2); /* Clean, semi-transparent white */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    color: black; /* Black text for better contrast */
+}
+
+.entry-list h3:hover {
+    background: rgba(255, 255, 255, 0.3); /* Light hover effect */
+}
+
+.entry-list .selected {
+    background: rgba(255, 255, 255, 0.4); /* Selected entry background */
+}
+
+/* Writing pane visibility control */
+.writing-pane {
+    display: none; /* Hidden by default */
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    position: relative; /* Ensure it's positioned */
+    z-index: 100; /* Ensure it's above other content */
+    width: 70%; /* Set width to 90% of the right pane */
+    margin: 0 auto; /* Center align the writing pane */
+}
+
+/* Add 'active' class for visibility */
+.writing-pane.visible {
+    display: flex; /* Show only when active */
+}
+
+.writing-pane input,
+.writing-pane textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Semi-transparent white border */
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2); /* Light background */
+    color: black; /* Black text inside inputs for visibility */
+}
+
+.writing-pane button {
+    background: rgba(13, 27, 42, 0.9); /* Dark button */
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.writing-pane button:hover {
+    background: rgba(13, 27, 42, 1); /* Darker shade on hover */
+}
+
+/* Right Pane: Takes up 70% of the container */
+.right-pane {
+    flex: 0 0 70%; /* 70% width of the container */
+    background: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 20px;
+    max-height: 100%; /* Prevent overflow */
+    overflow: auto; /* Allow scrolling if needed */
+}
+
+.right-pane h2 {
+    margin: 0;
+    font-size: 24px;
+    color: black; /* Black color for headings */
+}
+
+.right-pane p {
+    font-size: 16px;
+    line-height: 1.5;
+    color: black; /* Black color for paragraphs */
+}
+
+/* No entry text in right pane */
+.no-entry {
+    font-size: 18px;
+    color: black; /* Black text for no-entry */
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+/* Additional styles for better visual appeal */
+.journal-container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.left-pane {
+    flex: 0 0 30%; /* 30% width of the container */
+    background: rgba(255, 255, 255, 0.1); /* Very light, semi-transparent white */
+    border-right: 1px solid rgba(255, 255, 255, 0.2); /* Light white border */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    max-height: 100%; /* Ensure it doesn't exceed container height */
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+.entry-list h3 {
+    margin: 0;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.25); /* Semi-transparent white for entries */
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+    color: black; /* Black text for entries */
+}
+
+.entry-list h3:hover {
+    background: rgba(255, 255, 255, 0.35); /* Hover effect for entries */
+}
+
+.entry-list .selected {
+    background: rgba(255, 255, 255, 0.45); /* Selected background */
+}
+
+.writing-pane input,
+.writing-pane textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.2); /* Semi-transparent border */
+    border-radius: 5px;
+    color: black; /* Black text in inputs */
+}
+
+.writing-pane button {
+    background: rgba(13, 27, 42, 0.9); /* Dark button */
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.writing-pane button:hover {
+    background: rgba(13, 27, 42, 1); /* Darker shade on hover */
+}

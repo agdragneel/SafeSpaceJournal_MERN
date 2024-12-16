@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ParticlesComponent from '../components/Particles'; // Import the Particles component
 import './ContactPage.css'; // Import custom CSS for the page
+
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // Import FontAwesome
 import { faEnvelope, faPhone, faPaperPlane } from '@fortawesome/free-solid-svg-icons'; // Icons for Email, Phone, and Form

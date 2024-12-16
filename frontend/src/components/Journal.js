@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode"; // Correct import
+import './Journal.css';
 
 const Journal = ({ token }) => {
   const [journalEntries, setJournalEntries] = useState([]);
   const [newEntry, setNewEntry] = useState("");
   const [heading, setHeading] = useState("");
+  const [selectedEntry, setSelectedEntry] = useState(null); // Track selected entry
+  const [isWriting, setIsWriting] = useState(false); // Toggle between writing mode
+  const [isAddMode, setIsAddMode] = useState(false); // Check if the "Add" button is in use
 
   // Fetch journal entries
   const fetchEntries = async () => {
@@ -16,7 +20,12 @@ const Journal = ({ token }) => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      setJournalEntries(data.entries);
+  
+      // Sort entries by createdAt in descending order
+      const sortedEntries = data.entries.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+  
+      // Set the sorted entries
+      setJournalEntries(sortedEntries);
     } catch (error) {
       console.error("Error fetching journal entries:", error.message);
     }
@@ -25,7 +34,13 @@ const Journal = ({ token }) => {
   // Fetch entries on component mount or when token changes
   useEffect(() => {
     fetchEntries();
-  });
+  }, [token]);
+
+  // Format date to a readable string
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return date.toLocaleString(); // This will format it to a readable date and time string
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -65,42 +80,98 @@ const Journal = ({ token }) => {
       setNewEntry("");
       setHeading("");
       alert("Journal entry added!");
+      setIsWriting(false); // Switch back to reading mode
+      setIsAddMode(false); // Switch Add to Cancel
     } catch (error) {
       console.error("Error adding journal entry:", error.message);
     }
   };
 
+  const handleEntryClick = (entry) => {
+    setSelectedEntry(entry);
+    setIsWriting(false); // Ensure it's not in writing mode when an entry is clicked
+    setIsAddMode(false); // Reset the Add mode button
+  };
+
+  const handleAddClick = () => {
+    if (isAddMode) {
+      setIsWriting(false); // Cancel writing mode and go back to reading
+      setIsAddMode(false); // Reset Add to Cancel
+    } else {
+      setIsWriting(true); // Enable writing mode and show the form
+      setIsAddMode(true);
+      setSelectedEntry(null); // Clear the selected entry when adding a new one
+    }
+  };
+  
   return (
-    <div>
-      <h2>Journal Entries</h2>
+    <div className="journal-page">
+      <div className="journal-container">
+        {/* Left Pane: Journal Entries */}
+        <div className="left-pane">
+          {isAddMode ? (
+            <button className="add-button" onClick={handleAddClick}>
+              Cancel
+            </button>
+          ) : (
+            <button className="add-button" onClick={handleAddClick}>
+              + Add
+            </button>
+          )}
 
-      {/* Form for adding new journal entries */}
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          value={heading}
-          onChange={(e) => setHeading(e.target.value)}
-          placeholder="Journal Heading"
-          required
-        />
-        <textarea
-          value={newEntry}
-          onChange={(e) => setNewEntry(e.target.value)}
-          placeholder="Write your journal entry..."
-          required
-        />
-        <button type="submit">Add Entry</button>
-      </form>
-
-      {/* Display existing journal entries */}
-      <div>
-        {journalEntries.map((entry) => (
-          <div key={entry._id}>
-            <h3>{entry.heading}</h3>
-            <p>{entry.entryText}</p>
-            <small>{new Date(entry.createdAt).toLocaleString()}</small>
+          {/* Display list of journal entries */}
+          <div className="entry-list">
+            {journalEntries.map((entry) => (
+              <h3
+                key={entry._id}
+                className={selectedEntry && selectedEntry._id === entry._id ? "selected" : ""}
+                onClick={() => handleEntryClick(entry)}
+              >
+                {entry.heading}
+                <br />
+                <span style={{ fontStyle: 'italic', fontSize: '0.9em', color: '#666' }}>
+                  {formatDate(entry.createdAt)}
+                </span>
+              </h3>
+            ))}
           </div>
-        ))}
+        </div>
+
+        {/* Right Pane: Display selected entry or the writing form */}
+        <div className="right-pane">
+          {/* Show the form if in writing mode */}
+          {isWriting ? (
+            <div className="writing-pane visible">
+              <h2>Add Journal Entry</h2>
+              <input
+                type="text"
+                value={heading}
+                onChange={(e) => setHeading(e.target.value)}
+                placeholder="Journal Heading"
+                required
+              />
+              <textarea
+                value={newEntry}
+                onChange={(e) => setNewEntry(e.target.value)}
+                placeholder="What's on your mind?"
+                required
+              />
+              <button type="submit" onClick={handleSubmit}>
+                Post
+              </button>
+            </div>
+          ) : selectedEntry ? (
+            <>
+              <h2>{selectedEntry.heading}</h2>
+              <span style={{ fontStyle: 'italic', fontSize: '0.9em', color: '#666' }}>
+                {formatDate(selectedEntry.createdAt)}
+              </span>
+              <p>{selectedEntry.entryText}</p>
+            </>
+          ) : (
+            <div className="no-entry">No Entry Selected</div>
+          )}
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 // src/Pages/HomePage.js
 import React from 'react';
 import ParticlesComponent from '../components/Particles'; // Import the Particles component
+
 import './HomePage.css'; // Import custom CSS for the page
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom'; // Import Link for routing
