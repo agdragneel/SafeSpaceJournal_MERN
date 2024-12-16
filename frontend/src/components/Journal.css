@@ -117,15 +117,26 @@
 /* Right Pane: Takes up 70% of the container */
 .right-pane {
     flex: 0 0 70%; /* 70% width of the container */
-    background: rgba(255, 255, 255, 0.1); /* Semi-transparent white */
+    background: repeating-linear-gradient(
+        to bottom,
+        #fefefe, /* White background for the "page" */
+        #fefefe 35px, /* Line height */
+        #ddd 36px /* Gray line color */
+    );
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: flex-start;
     gap: 10px;
     padding: 20px;
-    max-height: 100%; /* Prevent overflow */
-    overflow: auto; /* Allow scrolling if needed */
+    max-height: 100%;
+    overflow-y: auto; /* Enable vertical scrolling */
+    box-sizing: border-box;
+    width: 100%; /* Ensure full width */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: shadow for depth */
+    border: 1px solid rgba(0, 0, 0, 0.1); /* Subtle border */
+    font-family: 'Georgia', serif; /* Optional: diary-like font */
 }
 
 .right-pane h2 {
@@ -137,7 +148,14 @@
 .right-pane p {
     font-size: 16px;
     line-height: 1.5;
-    color: black; /* Black color for paragraphs */
+    color: black; /* Black text for readability */
+    word-wrap: break-word; /* Ensure long words break */
+    overflow-wrap: break-word; /* Ensure proper word wrapping */
+    max-width: 95%; /* Limit width to avoid full stretch */
+    margin: 10px; /* Add space around the text */
+    padding: 10px; /* Add internal padding around the text */
+    background: rgba(255, 255, 255, 0.2); /* Optional: subtle background for the text */
+    border-radius: 5px; /* Rounded corners */
 }
 
 /* No entry text in right pane */
